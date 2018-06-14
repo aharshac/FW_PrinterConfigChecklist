@@ -90,5 +90,5 @@ HB: Configuration.h
 
 #define SPEAKER
 
-#define MINIPANEL
+#define MKS_MINI_12864
 

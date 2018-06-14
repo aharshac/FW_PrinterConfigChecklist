@@ -1,5 +1,9 @@
 HB: pins_RAMPS.h
 
+Redundant. 
+
+
+
 Change MINIPANEL pinouts
 
 
