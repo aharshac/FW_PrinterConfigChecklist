@@ -1,11 +1,15 @@
 HB: Configuration.h
 
+1. Copy "_Bootscreen.h"
+
 
 
 #define STRING_CONFIG_H_AUTHOR "Vijay Raghav"
 //#define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 0.01
 #define STRING_SPLASH_LINE2 "www.fracktal.in" 
+
+#define SHOW_CUSTOM_BOOTSCREEN
 
 #define BAUDRATE 115200
 
