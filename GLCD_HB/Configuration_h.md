@@ -2,8 +2,6 @@
 
 
 ## Instructions
-1. Copy `_Bootscreen.h`
-
 
 
 ## Code
