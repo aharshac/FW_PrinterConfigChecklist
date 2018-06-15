@@ -5,7 +5,7 @@
 
 
 ## Code
-```
+```clike
 
 #define THERMAL_PROTECTION_PERIOD 80
 #define THERMAL_PROTECTION_HYSTERESIS 15

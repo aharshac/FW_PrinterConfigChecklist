@@ -2,11 +2,11 @@
 
 
 ## Instructions
-1. Remove or comment out `void lcd_bootscreen()` to remove default bootscreen.
+1. Remove or comment out part of `void lcd_bootscreen()` to remove default bootscreen.
 
 
 ## Code
-```
+```clike
 void lcd_bootscreen() {
 	#if ENABLED(SHOW_CUSTOM_BOOTSCREEN)
 	  lcd_custom_bootscreen();

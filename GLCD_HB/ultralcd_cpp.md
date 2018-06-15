@@ -7,7 +7,7 @@
 
 
 ## Code
-```
+```clike
 
 // LCD Move menu
 // void lcd_move_menu()

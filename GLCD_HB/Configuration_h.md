@@ -5,7 +5,7 @@
 
 
 ## Code
-```
+```clike
 
 #define STRING_CONFIG_H_AUTHOR "Vijay Raghav"
 #define SHOW_BOOTSCREEN
