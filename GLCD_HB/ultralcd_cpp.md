@@ -2,11 +2,26 @@
 
 
 ## Instructions
-1. Move `void lcd_prepare_menu()` between `void lcd_move_menu()` and **Control submenu** section
-2. Copy **Bed Leveling Screens** section before the new position of `void lcd_prepare_menu()`
-
+1. Add **Quick Bed Leveling Options** to `void lcd_prepare_menu()`.
+2. Move `void lcd_prepare_menu()` between `void lcd_move_menu()` and **Control submenu** section
+3. Copy **Quick Bed Leveling Screens** section before the new position of `void lcd_prepare_menu()`
+4. Modify **Mesh Bed Leveling** to support **Z_MAX_ENDSTOP**
 
 ## Code
+### **Bed Leveling Options**
+```clike
+
+// //
+// //Quick Bed Leveling
+// //
+MENU_ITEM(submenu, "FW Bed Leveling Wizard", bedLevelingScreen1);
+MENU_MULTIPLIER_ITEM_EDIT(float32, "FW Z Offset", &home_offset[Z_AXIS], -20, 20);
+
+```
+
+&nbsp;
+
+### **Quick Bed Leveling Screens**
 ```clike
 
 // LCD Move menu
@@ -15,7 +30,7 @@
 
 /**
 *
-* Bed Leveling Screens
+* Quick Bed Leveling Screens
 *
 */
 
@@ -199,11 +214,73 @@ void bedLevelingScreen1() {
 }
 
 
-
-
-#error "void lcd_prepare_menu() {...}"
-
-
 // "Control" submenu
 
+```
+
+&nbsp;
+
+
+### **Mesh Bed Leveling**
+1. Create `float temp_z_home_offset` variable.
+```clike
+
+  #if ENABLED(LCD_BED_LEVELING)
+
+    /**
+     *
+     * "Prepare" > "Level Bed" handlers
+     *
+     */
+
+    static uint8_t manual_probe_index;
+	float temp_z_home_offset;
+
+```
+
+2. Move `home_offset[Z_AXIS]` to temp variable after homing.
+```clike
+
+/**
+ * Step 4: Display "Click to Begin", wait for click
+ *         Move to the first probe position
+ */
+void _lcd_level_bed_homing_done() {
+  if (lcdDrawUpdate) lcd_implementation_drawedit(PSTR(MSG_LEVEL_BED_WAITING));
+  if (lcd_clicked) {
+	temp_z_home_offset = home_offset[Z_AXIS];
+	home_offset[Z_AXIS] = 0;
+	
+```
+
+3. Set `home_offset[Z_AXIS]` from temp variable.
+```clike
+
+//
+// Bed leveling is done. Wait for G29 to complete.
+// A flag is used so that this can release control
+// and allow the command queue to be processed.
+//
+// When G29 finishes the last move:
+// - Raise Z to the "manual probe height"
+// - Don't return until done.
+//
+// ** This blocks the command queue! **
+//
+void _lcd_level_bed_done() {
+  if (!lcd_wait_for_move) {
+	#if MANUAL_PROBE_HEIGHT > 0 && DISABLED(MESH_BED_LEVELING)
+	  // Display "Done" screen and wait for moves to complete
+	  line_to_z(Z_MIN_POS + MANUAL_PROBE_HEIGHT);
+	  lcd_synchronize(PSTR(MSG_LEVEL_BED_DONE));
+	#endif
+	lcd_goto_previous_menu();
+	lcd_completion_feedback();
+	defer_return_to_status = false;
+  }
+  if (lcdDrawUpdate) lcd_implementation_drawmenu_static(LCD_HEIGHT >= 4 ? 1 : 0, PSTR(MSG_LEVEL_BED_DONE));
+  home_offset[Z_AXIS] = temp_z_home_offset;
+  lcdDrawUpdate = LCDVIEW_CALL_REDRAW_NEXT;
+}
+	
 ```

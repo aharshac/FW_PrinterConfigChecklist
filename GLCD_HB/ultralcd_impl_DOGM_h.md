@@ -7,6 +7,7 @@
 
 ## Code
 ```clike
+
 void lcd_bootscreen() {
 	#if ENABLED(SHOW_CUSTOM_BOOTSCREEN)
 	  lcd_custom_bootscreen();
@@ -37,4 +38,5 @@ void lcd_bootscreen() {
 	*/
 	safe_delay(BOOTSCREEN_TIMEOUT);
 }
+
 ```
