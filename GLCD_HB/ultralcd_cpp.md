@@ -1,13 +1,13 @@
-HB: ultralcd.cpp
-
-1. Move "void lcd_prepare_menu() {...}" between void lcd_move_menu() and "Control submenu" section
-2. Copy "Bed Leveling Screens" section before the new position of "void lcd_prepare_menu() {...}"
+# HB: ultralcd.cpp
 
 
+## Instructions
+1. Move `void lcd_prepare_menu()` between `void lcd_move_menu()` and **Control submenu** section
+2. Copy **Bed Leveling Screens** section before the new position of `void lcd_prepare_menu()`
 
 
-
-
+## Code
+```
 
 // LCD Move menu
 // void lcd_move_menu()
@@ -205,3 +205,5 @@ void bedLevelingScreen1() {
 
 
 // "Control" submenu
+
+```

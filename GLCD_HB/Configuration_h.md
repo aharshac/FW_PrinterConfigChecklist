@@ -1,11 +1,16 @@
-HB: Configuration.h
-
-1. Copy "_Bootscreen.h"
+# HB: Configuration.h
 
 
+## Instructions
+1. Copy `_Bootscreen.h`
+
+
+
+## Code
+```
 
 #define STRING_CONFIG_H_AUTHOR "Vijay Raghav"
-//#define SHOW_BOOTSCREEN
+#define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 0.01
 #define STRING_SPLASH_LINE2 "www.fracktal.in" 
 
@@ -96,3 +101,4 @@ HB: Configuration.h
 
 #define MKS_MINI_12864
 
+```

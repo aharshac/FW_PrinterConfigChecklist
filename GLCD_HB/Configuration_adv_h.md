@@ -1,5 +1,11 @@
-HB: Configuration_adv.h
+# HB: Configuration_adv.h
 
+
+## Instructions
+
+
+## Code
+```
 
 #define THERMAL_PROTECTION_PERIOD 80
 #define THERMAL_PROTECTION_HYSTERESIS 15
@@ -17,5 +23,6 @@ HB: Configuration_adv.h
 
 #define LIN_ADVANCE
 
-define ADVANCED_PAUSE_FEATURE
+#define ADVANCED_PAUSE_FEATURE
 
+```
